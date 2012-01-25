@@ -25,107 +25,122 @@ import java.util.ArrayList;
  */
 abstract class RSSBase {
 
-  private String title;
-  private android.net.Uri link;
-  private String description;
-  private java.util.List<String> categories;
-  private java.util.Date pubdate;
+	private String title;
+	private android.net.Uri link;
+	private String description;
+	private java.util.List<String> categories;
+	private java.util.Date pubdate;
+	private boolean mRestrictedContent = false;
 
-  /**
-   * Specify initial capacity for the List which contains the category names.
-   */
-  RSSBase(byte categoryCapacity) {
-    categories = categoryCapacity == 0 ? null : new ArrayList<String>(
-        categoryCapacity);
-  }
+	/**
+	 * Specify initial capacity for the List which contains the category names.
+	 */
+	RSSBase(byte categoryCapacity) {
+		categories = categoryCapacity == 0 ? null : new ArrayList<String>(categoryCapacity);
+	}
 
-  public String getTitle() {
-    return title;
-  }
+	/**
+	 * Used for YouTube Videos. If this method returns <code>true</code> the
+	 * parsed video is not meant to be played on a mobile device.
+	 */
+	public boolean isRestrictedContent() {
+		return mRestrictedContent;
+	}
 
-  public String getDescription() {
-    return description;
-  }
+	/**
+	 * @see #isRestrictedContent()
+	 */
+	public void setIsRestrictedContent(boolean pIsRestrictedContent) {
+		this.mRestrictedContent = pIsRestrictedContent;
+	}
 
-  public android.net.Uri getLink() {
-    return link;
-  }
 
-  public java.util.List<String> getCategories() {
-    if (categories == null) {
-      return java.util.Collections.emptyList();
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    return java.util.Collections.unmodifiableList(categories);
-  }
+	public String getDescription() {
+		return description;
+	}
 
-  public java.util.Date getPubDate() {
-    return pubdate;
-  }
+	public android.net.Uri getLink() {
+		return link;
+	}
 
-  void setTitle(String title) {
-    this.title = title;
-  }
+	public java.util.List<String> getCategories() {
+		if(categories == null) {
+			return java.util.Collections.emptyList();
+		}
 
-  void setLink(android.net.Uri link) {
-    this.link = link;
-  }
+		return java.util.Collections.unmodifiableList(categories);
+	}
 
-  void setDescription(String description) {
-    this.description = description;
-  }
+	public java.util.Date getPubDate() {
+		return pubdate;
+	}
 
-  void addCategory(String category) {
-    if (categories == null) {
-      categories = new ArrayList<String>(3);
-    }
+	void setTitle(String title) {
+		this.title = title;
+	}
 
-    this.categories.add(category);
-  }
+	void setLink(android.net.Uri link) {
+		this.link = link;
+	}
 
-  void setPubDate(java.util.Date pubdate) {
-    this.pubdate = pubdate;
-  }
+	void setDescription(String description) {
+		this.description = description;
+	}
 
-  /**
-   * Returns the title.
-   */
-  public String toString() {
-    return title;
-  }
+	void addCategory(String category) {
+		if(categories == null) {
+			categories = new ArrayList<String>(3);
+		}
 
-  /**
-   * Returns the hash code of the link.
-   */
-  @Override
-  public int hashCode() {
-    if (link == null) {
-      return 0;
-    }
+		this.categories.add(category);
+	}
 
-    return link.hashCode();
-  }
+	void setPubDate(java.util.Date pubdate) {
+		this.pubdate = pubdate;
+	}
 
-  /**
-   * Compares the links for equality.
-   */
-  @Override
-  public boolean equals(Object object) {
-    if (this == object) {
-      return true;
-    } else if (object instanceof RSSBase) {
-      /* other is never null */
-      final RSSBase other = (RSSBase) (object);
+	/**
+	 * Returns the title.
+	 */
+	public String toString() {
+		return title;
+	}
 
-      if (link == null) {
-        return other.link == null;
-      }
+	/**
+	 * Returns the hash code of the link.
+	 */
+	@Override
+	public int hashCode() {
+		if(link == null) {
+			return 0;
+		}
 
-      return link.equals(other.link);
-    } else {
-      return false;
-    }
-  }
+		return link.hashCode();
+	}
+
+	/**
+	 * Compares the links for equality.
+	 */
+	@Override
+	public boolean equals(Object object) {
+		if(this == object) {
+			return true;
+		} else if(object instanceof RSSBase) {
+			/* other is never null */
+			final RSSBase other = (RSSBase) (object);
+
+			if(link == null) {
+				return other.link == null;
+			}
+
+			return link.equals(other.link);
+		} else {
+			return false;
+		}
+	}
 
 }
-
