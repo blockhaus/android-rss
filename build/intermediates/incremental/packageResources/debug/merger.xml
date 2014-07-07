@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="2" >
+
+    <dataSet config="main" >
+        <source path="/Users/david/Documents/blockhaus/git.repositories/ama-kochbuch-erdapfel-android/mag-engine/libs/rss/src/main/res" />
+        <source path="/Users/david/Documents/blockhaus/git.repositories/ama-kochbuch-erdapfel-android/mag-engine/libs/rss/build/generated/res/rs/debug" />
+        <source path="/Users/david/Documents/blockhaus/git.repositories/ama-kochbuch-erdapfel-android/mag-engine/libs/rss/build/generated/res/generated/debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="/Users/david/Documents/blockhaus/git.repositories/ama-kochbuch-erdapfel-android/mag-engine/libs/rss/src/debug/res" />
+    </dataSet>
+
+</merger>
